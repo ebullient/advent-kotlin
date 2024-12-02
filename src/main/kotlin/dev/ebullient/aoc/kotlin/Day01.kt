@@ -1,23 +1,18 @@
 package dev.ebullient.aoc.kotlin
 
-import java.nio.file.Files
-import java.nio.file.Path
-import java.util.regex.Pattern
+import kotlin.math.abs
 
-class Day01() {
-    private val spaces: Pattern = Pattern.compile("\\s+");
+class Day01 : Day()  {
 
     fun readString(input: String): Locations {
-        return this.read(input.split("\n"));
+        return this.read(toLines(input));
     }
 
     fun readFile(fileName: String = ""): Locations {
-        val locations = Locations();
-        val lines = Files.readAllLines(Path.of(fileName));
-        return read(lines);
+        return read(fileToLines(fileName));
     }
 
-    fun read(input: List<String>): Locations {
+    private fun read(input: List<String>): Locations {
         val locations = Locations();
         for (line in input) {
             val pair = line.split(spaces);
@@ -35,7 +30,7 @@ class Day01() {
     fun part1(locations: Locations): Int {
         var distance: Int = 0
         locations.list1.zip(locations.list2) { a, b ->
-            distance += Math.abs(a - b)
+            distance += abs(a - b)
         };
         println("Differences between pairs: $distance");
         return distance;
@@ -51,16 +46,17 @@ class Day01() {
         println("Similarity score: $score");
         return score;
     }
-}
 
-class Locations {
-    val list1 = mutableListOf<Int>();
-    val list2 = mutableListOf<Int>();
+    class Locations {
+        val list1 = mutableListOf<Int>();
+        val list2 = mutableListOf<Int>();
+    }
 }
 
 fun main() {
     val day01 = Day01();
     val locations = day01.readFile("src/main/data/day01.txt");
+    println("Day 01:")
     day01.part1(locations);
     day01.part2(locations);
 }
