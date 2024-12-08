@@ -21,7 +21,7 @@ class Day04Test {
         """.trimIndent()
 
         val grid = day4.readString(input)
-        grid.print()
+        grid.draw('.')
         assertThat(grid.walk()).isEqualTo(18)
         assertThat(grid.walk2()).isEqualTo(9)
     }

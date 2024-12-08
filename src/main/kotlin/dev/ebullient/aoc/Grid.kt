@@ -1,5 +1,39 @@
 package dev.ebullient.aoc
 
+// Extension function
+fun <T> Map<Point, T>.draw(placeholder: Char, bounds: Point) {
+    for (row in 0 until bounds.row) {
+        for (col in 0 until bounds.col) {
+            print(this[Point(row, col)] ?: placeholder)
+        }
+        println()
+    }
+}
+
+fun Map<Point, Char>.toString(placeholder: Char, bounds: Point): String {
+    val builder = StringBuilder()
+    for (row in 0 until bounds.row) {
+        for (col in 0 until bounds.col) {
+            builder.append(this[Point(row, col)] ?: placeholder)
+        }
+        builder.appendLine()
+    }
+    return builder.toString()
+}
+
+fun Map<Point, Char>.toString(placeholder: Char, grid: Grid): String {
+    val builder = StringBuilder()
+    for (row in 0 until grid.bounds.row) {
+        for (col in 0 until grid.bounds.col) {
+            val pt = Point(row, col)
+            val value = this[pt] ?: placeholder
+            builder.append(grid.get(pt, value))
+        }
+        builder.appendLine()
+    }
+    return builder.toString()
+}
+
 open class Grid() {
     private val data: MutableMap<Point, Char> = mutableMapOf<Point, Char>()
     lateinit var bounds: Point
@@ -35,16 +69,7 @@ open class Grid() {
         return p.row in 0 until bounds.row && p.col in 0 until bounds.col
     }
 
-    fun print() {
-        draw(' ')
-    }
-
     fun draw(placeholder: Char) {
-        for (row in 0 until bounds.row) {
-            for (col in 0 until bounds.col) {
-                print(get(Point(row, col), placeholder))
-            }
-            println()
-        }
+        data.draw(placeholder, bounds)
     }
 }
