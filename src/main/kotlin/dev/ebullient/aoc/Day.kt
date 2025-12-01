@@ -4,8 +4,17 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.regex.Pattern
 
-abstract class Day {
-    val spaces: Pattern = Pattern.compile("\\s+");
+abstract class Day <T> {
+
+    fun readString(input: String): T {
+        return this.read(toLines(input));
+    }
+
+    fun readFile(fileName: String = ""): T {
+        return read(fileToLines(fileName));
+    }
+
+    abstract fun read(input: List<String>): T;
 
     fun toLines(input: String): List<String> {
         return input.split("\n");
