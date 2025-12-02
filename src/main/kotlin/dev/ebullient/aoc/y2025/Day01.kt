@@ -9,6 +9,15 @@ import kotlin.math.abs
 class Day01 : Day<List<Instruction>>() {
     private val part1Regex = """(L|R)\d+""".toRegex()
 
+    override fun run() {
+        val day01 = Day01()
+        val instructions = day01.readFile("src/main/data/2025/day01.txt")
+        var password = day01.part1(instructions)
+        println("Day 01, part 1: $password")
+        password = day01.part2(instructions)
+        println("Day 01, part 2: $password")
+    }
+
     override fun read(input: List<String>): List<Instruction> {
         return input.filter(part1Regex::matches)
             .map { Instruction(it) }
@@ -91,11 +100,3 @@ class Day01 : Day<List<Instruction>>() {
     }
 }
 
-fun main() {
-    val day01 = Day01();
-    val instructions = day01.readFile("src/main/data/2025/day01.txt");
-    var password = day01.part1(instructions);
-    println("Day 01, part 1: $password")
-    password = day01.part2(instructions);
-    println("Day 01, part 2: $password")
-}

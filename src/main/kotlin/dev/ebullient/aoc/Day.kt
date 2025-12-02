@@ -6,6 +6,10 @@ import java.util.regex.Pattern
 
 abstract class Day <T> {
 
+    abstract fun run();
+
+    abstract fun read(input: List<String>): T;
+
     fun readString(input: String): T {
         return this.read(toLines(input));
     }
@@ -13,8 +17,6 @@ abstract class Day <T> {
     fun readFile(fileName: String = ""): T {
         return read(fileToLines(fileName));
     }
-
-    abstract fun read(input: List<String>): T;
 
     fun toLines(input: String): List<String> {
         return input.split("\n");
