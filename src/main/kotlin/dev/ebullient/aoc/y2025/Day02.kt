@@ -5,7 +5,7 @@ import dev.ebullient.aoc.Day
 class Day02 : Day<List<Day02.Range>>() {
 
     override fun run() {
-        val day02 = Day02();
+        val day02 = Day02()
         val input = day02.readFile("src/main/data/2025/day02.txt")
         println("Day 02, part 1: ${day02.part1(input)}")
         println("Day 02, part 2: ${day02.part2(input)}")
@@ -14,7 +14,7 @@ class Day02 : Day<List<Day02.Range>>() {
     override fun read(input: List<String>): List<Day02.Range> {
         return input
             .flatMap { it.split(",") }
-            .filter(String::isNotEmpty)
+            .filter(String::isNotBlank)
             .map { Range(it) }
             .toList()
     }
